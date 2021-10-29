@@ -28,6 +28,17 @@ func main() {
 		}
 	}
 
+	// masterブランチを基底に新しくブランチを作るのは禁止
+	if args[0] == "checkout" {
+		if 3 <= len(args) && args[1] == "-b" {
+			branchName := getCurrentBranchName()
+			if branchName == "master" {
+				fmt.Print("\n\n[ERROR] DON'T MERGE INTO THE MASTER OR DEVELOPMENT BRANCH FOR ANY REASON!\n\n\n")
+				os.Exit(0)
+			}
+		}
+	}
+
 	// どうしてもmasterやdevelopmentに何か操作したい時に備えてforceコマンドを実装しておく
 	if args[0] == "force" {
 		args = args[1:]
