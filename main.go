@@ -21,8 +21,7 @@ func main() {
 	// masterとdevelopmentブランチに直接commitするのは禁止
 	if args[0] == "commit" {
 		// 現在のブランチを取得
-		result, _ := exec.Command("git", []string{"rev-parse", "--abbrev-ref", "HEAD"}...).Output()
-		branchName := strings.TrimRight(string(result), "\n")
+		branchName := getCurrentBranchName()
 		if branchName == "master" || branchName == "development" {
 			fmt.Print("\n\n[ERROR] DON'T MERGE INTO THE MASTER OR DEVELOPMENT BRANCH FOR ANY REASON!\n\n\n")
 			os.Exit(0)
@@ -55,4 +54,10 @@ func existsHubCommand() bool {
 	result, _ := exec.Command("type", "hub").Output()
 	hubCommandExists := strings.TrimRight(string(result), "\n")
 	return hubCommandExists != "hub not found"
+}
+
+func getCurrentBranchName() string {
+	result, _ := exec.Command("git", []string{"rev-parse", "--abbrev-ref", "HEAD"}...).Output()
+	branchName := strings.TrimRight(string(result), "\n")
+	return branchName
 }
