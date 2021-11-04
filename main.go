@@ -29,6 +29,11 @@ func main() {
 		}
 	}
 
+	// どうしてもmasterやdevelopmentに何か操作したい時に備えてforceコマンドを実装しておく
+	if args[0] == "force" {
+		args = args[1:]
+	}
+
 	// gitコマンドを生成
 	cmd := exec.Command("git", args...)
 
