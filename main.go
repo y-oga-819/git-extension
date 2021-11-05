@@ -13,7 +13,7 @@ func main() {
 	// masterと名前のつくブランチをマージするのは禁止
 	if args[0] == "merge" {
 		if -1 != strings.Index(args[1], "master") {
-			fmt.Print("\n\n[ERROR] DON'T MERGE INTO THE MASTER BRANCH FOR ANY REASON!\n\n\n")
+			fmt.Print("\n\n[ERROR] DON'T MERGE INTO THE MASTER BRANCH FOR ANY REASON!\n\n")
 			os.Exit(0)
 		}
 	}
@@ -23,17 +23,17 @@ func main() {
 		// 現在のブランチを取得
 		branchName := getCurrentBranchName()
 		if branchName == "master" || branchName == "development" {
-			fmt.Print("\n\n[ERROR] DON'T MERGE/COMMIT INTO THE MASTER OR DEVELOPMENT BRANCH FOR ANY REASON!\n\n\n")
+			fmt.Print("\n\n[ERROR] DON'T MERGE/COMMIT INTO THE MASTER OR DEVELOPMENT BRANCH FOR ANY REASON!\n\n")
 			os.Exit(0)
 		}
 	}
 
 	// masterブランチを基底に新しくブランチを作るのは禁止
 	if args[0] == "checkout" {
-		if 3 <= len(args) && args[1] == "-b" {
+		if 2 <= len(args) && args[1] == "-b" {
 			branchName := getCurrentBranchName()
 			if branchName == "master" {
-				fmt.Print("\n\n[ERROR] DON'T MERGE INTO THE MASTER OR DEVELOPMENT BRANCH FOR ANY REASON!\n\n\n")
+				fmt.Print("\n\n[ERROR] DON'T MERGE INTO THE MASTER OR DEVELOPMENT BRANCH FOR ANY REASON!\n\n")
 				os.Exit(0)
 			}
 		}
