@@ -16,5 +16,6 @@ git clone https://github.com/y-oga-819/git-extension.git
 cd get-extension
 make install
 
-echo 'alias git=git-extension' >> ~/.zshrc
+echo 'alias git=git-extension' >> ~/.zshrc # 自信の環境に応じてシェルプロファイルは適宜書き換えてください
+exec $SHELL -l
 ```
