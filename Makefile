@@ -9,5 +9,4 @@ clean:
 
 .PHONY: install
 install:
-	$(MAKE) build
 	cp bin/git-extension /usr/local/bin/git-extension
