@@ -1,3 +1,5 @@
+.DEFAULT_GOAL := install
+
 .PHONY: build
 build:
 	$(MAKE) clean
