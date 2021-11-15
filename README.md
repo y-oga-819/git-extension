@@ -14,8 +14,8 @@ git force checkout -b master
 git clone https://github.com/y-oga-819/git-extension.git
 
 cd get-extension
-make install
+make install # 要 /usr/local/bin/ 配下への write 権限
 
-echo 'alias git=git-extension' >> ~/.zshrc # 自信の環境に応じてシェルプロファイルは適宜書き換えてください
+echo 'alias git=git-extension' >> ~/.zshrc # 自身の環境に応じてシェルプロファイルは適宜書き換えてください
 exec $SHELL -l
 ```
