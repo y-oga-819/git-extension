@@ -9,6 +9,18 @@ import (
 
 func main() {
 	args := os.Args[1:]
+	
+	// hubコマンドを利用しているなら差し替える
+	gitCommand := "git"
+	if existsHubCommand() {
+		gitCommand = "hub"
+	}
+
+	if (len(args) == 0) {
+		fmt.Print("[INFO] This message is displayed via git-extension\n\n")
+		execGitCommand(gitCommand, []string{"help"})
+		os.Exit(0)
+	}
 
 	// masterと名前のつくブランチをマージするのは禁止
 	if args[0] == "merge" {
@@ -44,12 +56,13 @@ func main() {
 		args = args[1:]
 	}
 
-	// hubコマンドを利用しているなら差し替える
-	gitCommand := "git"
-	if existsHubCommand() {
-		gitCommand = "hub"
+	err := execGitCommand(gitCommand, args)
+	if (err != nil) {
+		panic(err)
 	}
+}
 
+func execGitCommand(gitCommand string, args []string) error {
 	// gitコマンドを生成
 	cmd := exec.Command(gitCommand, args...)
 
@@ -58,7 +71,7 @@ func main() {
 	cmd.Stderr = os.Stderr
 
 	// gitコマンド実行
-	cmd.Run()
+	return cmd.Run()
 }
 
 func existsHubCommand() bool {
