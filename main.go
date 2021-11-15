@@ -62,9 +62,13 @@ func main() {
 }
 
 func existsHubCommand() bool {
-	result, _ := exec.Command("type", "hub").Output()
+	result, _ := exec.Command("sh", "-c", "type hub").Output()
+	if len(result) == 0 {
+		return false
+	}
+
 	hubCommandExists := strings.TrimRight(string(result), "\n")
-	return hubCommandExists != "hub not found"
+	return hubCommandExists != "hub: not found"
 }
 
 func getCurrentBranchName() string {
